@@ -19,7 +19,7 @@ class AcademicProfileController extends Controller
 
     public function create()
     {
-    	return view('profile.academic');
+    	return view('profile.create');
     }
 
     public function store(Request $request)
@@ -28,7 +28,7 @@ class AcademicProfileController extends Controller
         
         $image = $request->pic_url;
         $imagename = time()."-".$image->getClientOriginalName();
-        Image::make($image->getRealPath())->resize(200, 200)->save(public_path().'/images/'. $imagename);
+        Image::make($image->getRealPath())->resize(200, 200)->save('/'.public_path().'/images/'. $imagename);
 
         $profile = new AcademicProfile;
         $profile->user_id = $request->user_id;

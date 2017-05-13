@@ -8,6 +8,8 @@ use App\Http\Requests;
 
 use App\SponsorApplication;
 
+use App\AcademicProfile;
+
 use Auth;
 
 class SponsorApplicationController extends Controller
@@ -19,9 +21,15 @@ class SponsorApplicationController extends Controller
 	
     public function index()
     {
-        $applicants = SponsorApplication::where('status', '=', 1)->get();
+        $applicants = SponsorApplication::where('status', '=', 0)->get();
         return view('application.index')
                     ->with('applicants', $applicants);
+    }
+
+    public function details(AcademicProfile $applicant)
+    {
+        return view('pages.details')
+                    ->with('applicant', $applicant);
     }
 
     public function create()
@@ -65,6 +73,12 @@ class SponsorApplicationController extends Controller
         $applicants = SponsorApplication::where('status', '=', 0)->get();
         return view('application.verify')
                     ->with('applicants', $applicants);
+    }
+
+    public function fund(AcademicProfile $applicant)
+    {
+        return view('pages.payment')
+                    ->with('applicant', $applicant);
     }
 
     public function postVerify(SponsorApplication $application)

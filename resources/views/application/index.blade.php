@@ -12,8 +12,7 @@
 	    		@foreach($applicants as $applicant)
 		        <div class="item  col-xs-6 col-lg-3">
 		            <div class="thumbnail">
-		                <img class="group list-group-image" src="{{ $applicant->profiler->pic_url
-		                 }}" alt="" />
+		                <img class="group list-group-image" src="{{ $applicant->profiler->pic_url }}" alt="" />
 		                <div class="caption">
 		                    <h4 class="group inner list-group-item-heading">
 		                        {{ $applicant->profiler->user->name }}</h4>
@@ -26,7 +25,7 @@
 		                        </div>
 		                        <div class="col-xs-12 col-md-6">
 		                            <a class="btn btn-success" 
-		                            href="#">Details</a>
+		                            href="{{ url('/applicants/'.$applicant->profiler->id) }}">Details</a>
 		                        </div>
 		                    </div>
 		                </div>

@@ -19,9 +19,9 @@ class SponsorApplicationsTableSeeder extends Seeder
         $faker = Faker::create();
     	foreach (range(1,10) as $index) {
 	        DB::table('sponsor_applications')->insert([
-	            'academic_profile_id' => $faker->randomElement($profiles),
+	            'academic_profile_id' => $faker->unique()->randomElement($profiles),
 	            'amount' => $faker->randomFloat(2, 1, 9) * 100,
-	            'profile' => implode($faker->paragraphs(5)),
+	            'profile' => implode($faker->paragraphs(2)),
 	            'status' => $faker->numberBetween(0, 3)     
 	        ]);
         }

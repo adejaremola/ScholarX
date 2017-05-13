@@ -17,6 +17,9 @@ Route::get('/', function () {
 Route::auth();
 
 Route::get('/applicants', 'SponsorApplicationController@index');
+Route::get('/applicants/{applicant}', 'SponsorApplicationController@details');
+Route::get('/applicants/{applicant}/fund', 'SponsorApplicationController@fund');
+
 Route::get('/apply', 'SponsorApplicationController@create');
 Route::post('/apply', 'SponsorApplicationController@store');
 

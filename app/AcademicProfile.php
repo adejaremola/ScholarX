@@ -2,6 +2,10 @@
 
 namespace App;
 
+use App\User;
+
+use App\SponsorApplication;
+
 use Illuminate\Database\Eloquent\Model;
 
 class AcademicProfile extends Model
@@ -25,11 +29,11 @@ class AcademicProfile extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
     }
 
     public function application()
     {
-        return $this->hasOne('App\SponsorApplication');
+        return $this->hasOne(SponsorApplication::class);
     }
 }

@@ -107,7 +107,8 @@
     						   ['class' => 'control-label col-sm-2']) !!}
 		    	<div class="col-sm-10"> 
 		    		{!! Form::file('pic_url', null,
-		    					  ['class' => 'control-label', 				'required' => 'true']) !!}
+		    					  ['class' => 'control-label',
+		    					   'required' => 'true']) !!}
 		    	</div>
 		  	</div>
 		  	<div class="form-group"> 

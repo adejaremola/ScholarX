@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\AcademicProfile;
+
 use Illuminate\Database\Eloquent\Model;
 
 class SponsorApplication extends Model
@@ -15,13 +17,15 @@ class SponsorApplication extends Model
 	'profile' => 'required',
 		);
 
-    public function sponsor()
-    {
-    	return $this->belongsTo('App\Sponsor');
-    }
+    /*
+    *public function sponsor()
+    *{
+    *	return $this->belongsTo('App\Sponsor');
+    *}
+    */
 
     public function profiler()
     {
-    	return $this->belongsTo('App\AcademicProfile', 'academic_profile_id');
+    	return $this->belongsTo(AcademicProfile::class, 'academic_profile_id');
     }
 }

@@ -18,7 +18,9 @@ class UsersTableSeeder extends Seeder
 	        DB::table('users')->insert([
 	            'name' => $faker->name,
 	            'email' => $faker->email,
-	            'password' => bcrypt('secret'),
+                'password' => bcrypt('secret'),
+                'updated_at' => \Carbon\Carbon::now(),
+	            'created_at' => \Carbon\Carbon::now(),
 	        ]);
         }
     }
