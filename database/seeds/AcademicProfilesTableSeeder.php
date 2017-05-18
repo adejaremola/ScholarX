@@ -27,7 +27,9 @@ class AcademicProfilesTableSeeder extends Seeder
 	            'matric_no' => '010/ABA/499',
 	            'cgpa' => $faker->randomFloat(2, 0, 5),
 	            'pic_url' => $faker->imageUrl($width = 200, $height = 200),
-	            'category' => $faker->numberBetween(1, 2)     
+	            'category' => $faker->numberBetween(1, 2),
+                'updated_at' => \Carbon\Carbon::now(),
+                'created_at' => \Carbon\Carbon::now(),     
 	        ]);
         }
     }

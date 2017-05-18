@@ -21,13 +21,8 @@ class Sponsor extends Model
 		'user_id' => 'required|integer'
 		);
 
-    public function user()
-    {
-        return $this->belongsTo('App\User');
-    }
-
     public function application()
     {
-    	return $this->hasMany('App\SponsorApplication', 'sponsor_id');
+    	return $this->belongsTo('App\SponsorApplication');
     }
 }

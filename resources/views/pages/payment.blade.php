@@ -29,14 +29,19 @@
 					    <a href="#"><img class="img-responsive" src="/images/Stripe Logo (blue).png"></a>
 				    </div>
 				    <div id="menu1" class="tab-pane fade">
-				    	<a href="#"><img src="/images/two-toned.png" id="img1"></a><br>
+				    	<form >
+							<script src="https://js.paystack.co/v1/inline.js"></script>
+					    	<a type="submit" role="button" onclick="payWithPaystack()"><img src="/images/two-toned.png" id="img1"></a><br>
+						</form>
 				    	<br>
 				    	<img src="/images/or_image.png" id="img2">
 				    	<br>
 				    	<br>
-				    	<button type="button" class="btn btn-lg btn-primary btn-block">Bank Transfer</button>
+				    	<button type="button" class="btn btn-lg btn-primary btn-block" data-toggle="modal" data-target="#transfer">Bank Transfer</button>
 				    </div>
+				@include('includes.modal')
 				</div>
+
 			</div>     
 	    </div>   
 	</div>

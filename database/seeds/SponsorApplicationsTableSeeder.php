@@ -22,7 +22,9 @@ class SponsorApplicationsTableSeeder extends Seeder
 	            'academic_profile_id' => $faker->unique()->randomElement($profiles),
 	            'amount' => $faker->randomFloat(2, 1, 9) * 100,
 	            'profile' => implode($faker->paragraphs(2)),
-	            'status' => $faker->numberBetween(0, 3)     
+	            'status' => $faker->numberBetween(0, 4) ,
+                'updated_at' => \Carbon\Carbon::now(),
+                'created_at' => \Carbon\Carbon::now(),    
 	        ]);
         }
     }

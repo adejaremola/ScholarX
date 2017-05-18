@@ -16,7 +16,7 @@ class AcademicProfile extends Model
 
     
     public static $rules = array(
-		'user_id' => 'required|integer',
+		'user_id' => 'numeric',
 		'institution' => 'required',
 		'level' => 'required|alpha_num',
         'faculty' => '',

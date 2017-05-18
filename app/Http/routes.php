@@ -16,6 +16,9 @@ Route::get('/', function () {
 
 Route::auth();
 
+
+Route::get('/dash', 'StudentController@redirect');
+
 Route::get('/applicants', 'SponsorApplicationController@index');
 Route::get('/applicants/{applicant}', 'SponsorApplicationController@details');
 Route::get('/applicants/{applicant}/fund', 'SponsorApplicationController@fund');
@@ -27,7 +30,40 @@ Route::get('/verify', 'SponsorApplicationController@verify');
 Route::post('verify/{application}', 'SponsorApplicationController@postVerify');
 Route::post('reject/{application}', 'SponsorApplicationController@reject');
 
-Route::get('/profile', 'AcademicProfileController@create');
-Route::post('/profile', 'AcademicProfileController@store');
-Route::put('/profile/{profile}', 'AcademicProfileController@edit');
+Route::get('/user/profile/create', 'StudentController@create');
+Route::put('/user/{profile}/profile', 'StudentController@edit');
+Route::post('user/{profile}/profile', 'StudentController@store');
+
+Route::get('/user/{profile}/index', 'StudentController@index');
+
+Route::get('/user/{profile}/apply', 'StudentController@apply');
+Route::post('/user/{profile}', 'StudentController@postApply');
+
+
+Route::get('/application/{application}/edit', 'StudentController@editApplication');
+Route::put('/application/{application}', 'StudentController@postEditApplication');
+
+Route::delete('/application/{application}/delete', 'StudentController@deleteApplication');
+
+Route::get('/sponsor/index', 'SponsorController@index');
+Route::get('/sponsor/{application}/details', 'SponsorController@details');
+
+Route::get('/sponsor/{application}/fund', 'SponsorController@fund');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

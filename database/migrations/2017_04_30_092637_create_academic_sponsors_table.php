@@ -14,7 +14,8 @@ class CreateAcademicSponsorsTable extends Migration
     {
         Schema::create('sponsors', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned()->default(0);
+            $table->float('amount', 12);
+            $table->integer('sponsor_application_id')->nullable()->unsigned()->default(0);
             $table->timestamps();
         });
     }

@@ -18,7 +18,7 @@ class CreateSponsorApplicationsTable extends Migration
             $table->integer('academic_profile_id')->unsigned()->default(0);
             $table->float('amount', 12);
             $table->text('profile');
-            $table->enum('status', [0, 1, 2, 3]);
+            $table->enum('status', [0, 1, 2, 3, 4]);
             $table->timestamps();
         });
     }
