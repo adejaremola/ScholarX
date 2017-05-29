@@ -35,21 +35,21 @@
     @else
     <h2 class="text-center">Create Application</h2>
 	<div>
-    	{!! Form::open(['url' => '/application/'.$application->id, 
+    	{!! Form::open(['url' => '/user/'.$user->profile->id, 
     					'class' => 'form-horizontal']) !!}
     @endif
     		<div class="form-group">
     			{!! Form::label('name', 'Full Name:', 
     							['class' => 'control-label col-sm-2']) !!}
 		    	<div class="col-sm-10">
-		      		<p class="form-control-static">{{ Auth::user()->name }}</p>
+		      		<p class="form-control-static">{{ $user->name }}</p>
 		    	</div>
 		  	</div>
 		  	<div class="form-group">
 		  		{!! Form::label('institution', 'Institution:', 
     							['class' => 'control-label col-sm-2']) !!}
 		    	<div class="col-sm-10">
-		      		<p class="form-control-static">{{ Auth::user()->profile->institution }}</p>
+		      		<p class="form-control-static">{{ $user->profile->institution }}</p>
 		    	</div>
 		  	</div>
 		  	<div class="form-group">
@@ -72,7 +72,8 @@
 		  	</div>
 		  	<div class="form-group"> 
 		    	<div class="col-sm-offset-2 col-sm-10">
-		    		{!! Form::submit('Submit', ['class' => 'btn btn-success btn-lg']) !!}
+		    		{!! Form::submit($method == 'edit'? 'Update' : 'Submit', ['class' => 'btn btn-success btn-lg']) !!}
+		    		<a href="{{ url('/user/profile/create') }}" class="btn btn-warning btn-lg">Back</a>
 		    	</div>
 		  	</div>
 		{!! Form::close() !!}

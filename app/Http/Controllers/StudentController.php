@@ -8,6 +8,8 @@ use App\Http\Requests;
 
 use App\AcademicProfile;
 
+use App\User;
+
 use App\SponsorApplication;
 
 use Image;
@@ -21,39 +23,27 @@ class StudentController extends Controller
 		$this->middleware('auth');
 	}
 
-    public function redirect()
-    {
-        return redirect('user/profile/create');
-    }
-
-    public function index(AcademicProfile $profile)
-    {   
-        $applications = SponsorApplication::where('academic_profile_id', '=', $profile->id )
-                                                  ->get();
-        return view('student.index')
-                ->with('profile', $profile)
-                ->with('applications', $applications);
-    }
-
+//profile actions
     public function create()
     {
         $user = Auth::user();
-        $profile = $user->profile;
-    	return view('student.profile')
-                ->with('user', $user)
-                ->with('profile', $profile);
+        if ($user->profile) {
+            return redirect('/user/apply');
+        }
+        return view('village.students.profile.update')
+                ->with('user', $user);
     }
 
-    public function store(Request $request)
+    public function store(User $user, Request $request)
     {    
         $this->validate($request, AcademicProfile::$rules);
         
         $image = $request->pic_url;
         $imagename = time()."-".$image->getClientOriginalName();
-        Image::make($image->getRealPath())->resize(200, 200)->save('/'.public_path().'/images/'. $imagename);
+        Image::make($image->getRealPath())->resize(200, 200)->save(public_path().'/images/'. $imagename);
 
         $profile = new AcademicProfile;
-        $profile->user_id = $request->user_id;
+        $profile->user_id = $user->id;
         $profile->institution = $request->institution;
         $profile->faculty = $request->faculty;
         $profile->department = $request->department;
@@ -65,14 +55,22 @@ class StudentController extends Controller
         $profile->save();
 
         if ($profile) {
-	        return redirect('/apply');
+            return redirect('/user/apply')->with('message', 'Profile created successfully!');
         }
         else {
-        	 return back()->withInput();
+             return back()->withInput()
+                          ->with('message', 'Unsuccessful!, retry later.');
         }
     }
 
-    public function edit(AcademicProfile $profile, Request $request)
+    public function edit(AcademicProfile $profile)
+    {
+        $user = Auth::user();
+        return view('village.students.profile.update')
+                    ->with('user', $user);
+    }
+
+    public function postEdit(AcademicProfile $profile, Request $request)
     {
         $this->validate($request, AcademicProfile::$rules);
         
@@ -92,43 +90,80 @@ class StudentController extends Controller
         $profile->update();
 
         if ($profile->update()) {
-            return redirect('/profile/create')
+            return redirect('/user/apply')
                         ->with('message', 'Profile Update successful!');
         }
         else {
              return back()->withInput();
         }
     }
+//profile requests end
 
+
+
+
+//Sponsor Applications requests
+    //Index - All applications of the user
+    public function index(AcademicProfile $profile)
+    {   
+        $applications = SponsorApplication::where('academic_profile_id', '=', $profile->id )
+                                                  ->get();
+        return view('village.students.applications.index')
+                ->with('profile', $profile)
+                ->with('applications', $applications)
+                ->with('user', Auth::user());
+    }
+
+    //This redirects to the application page, for new application
     public function apply(SponsorApplication $application)
     {
-        $profile = $application->profiler;
-        $method = 'apply';
-        return view('student.edit_application')
-                    ->with('application', $application)
-                    ->with('profile', $application)
-                    ->with('method', $method);
+        if(Auth::user()->profile){
+            return view('village.students.applications.edit')
+                        ->with('user', Auth::user())
+                        ->with('method', 'create');
+        }
+        return redirect('/user/profile/create');
     }
 
+    //This post-function handles the logic in creating the new application
     public function postApply(AcademicProfile $profile, Request $request)
     {
-        # code...
+        $this->validate($request, SponsorApplication::$rules);
+
+        $application = new SponsorApplication;
+        $application->amount = $request->amount;
+        $application->profile = $request->profile;
+        $application->academic_profile_id = $profile ->id;
+        $application->sponsor_id = '';
+        $application->status = 0;
+        $application->save();
+
+        if ($application) {
+            return redirect('/user/'.$profile->id.'/index')
+                                ->with('message', 'Application successfully created!');
+        }else{
+            return back()->withInput()
+                         ->with('message', 'Unsuccessful application, retry later.');
+        }
     }
 
+    //Rredirectss to editing an old application page
     public function editApplication(SponsorApplication $application)
     {
-        $profile = $application->profiler;
+        $profile = $application->profile;
         $method = 'edit';
-        return view('student.edit_application')
+        return view('village.students.applications.edit')
                     ->with('application', $application)
                     ->with('profile', $application)
-                    ->with('method', $method);
+                    ->with('user', Auth::user())       
+                    ->with('method', $method);        
     }
 
-    public function postEditApplication(Request $request, SponsorApplication $application)
+    //Logic for editing a pre-existing application
+    public function postEditApplication(SponsorApplication $application, Request $request)
     {
         $this->validate($request, SponsorApplication::$rules);
-        
+
         $application->academic_profile_id = Auth::user()->profile->id;
         $application->sponsor_id = '';
         $application->amount = $request->amount;
@@ -148,6 +183,7 @@ class StudentController extends Controller
         }
     }
 
+    //logic for deleting an existing application, note that this has no page
     public function deleteApplication(SponsorApplication $application)
     {
         $id = $application->profiler->id;
@@ -161,6 +197,8 @@ class StudentController extends Controller
                     ->withErrors('Delete unsuccessful, please try again later!');
         }
     }
+
+//Sponsor Application requests end here
 
 }
 

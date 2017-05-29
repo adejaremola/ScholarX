@@ -32,16 +32,6 @@ class SponsorApplicationController extends Controller
                     ->with('applicant', $applicant);
     }
 
-    public function create()
-    {
-        $academic_profile = Auth::user()->academicProfile;
-    	if(Auth::user()->academicProfile){
-	    	return view('application.application')
-                        ->with('academic_profile', $academic_profile);
-    	}
-
-    	return redirect('/profile');
-    }
 
     public function store(Request $request)
     {

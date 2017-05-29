@@ -8,11 +8,11 @@
   <div class="row">
     <div class="col-md-6" style="padding-left: 20%">
         <p>Students</p>
-        <a href="/dash" role="button" class="btn btn-info btn-lg">Apply For Funding</a>
+        <a href="{{ url('/user/apply') }}" role="button" class="btn btn-info btn-lg">Apply For Funding</a>
     </div>
     <div class="col-md-6" style="padding-right: 20%">
         <p>Sponsors</p>
-        <a href="/applicants" role="button" class="btn btn-warning btn-lg">Browse FundRaisers</a>
+        <a href="{{ url('/applications/index') }}" role="button" class="btn btn-warning btn-lg">Browse FundRaisers</a>
     </div>
   </div>
 </div>

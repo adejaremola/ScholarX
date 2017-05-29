@@ -12,7 +12,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'role'
     ];
 
     /**
@@ -31,6 +31,13 @@ class User extends Authenticatable
 
     public function sponsor()
     {
-        return $this->hasOne('App\Sponsor');
+        return $this->hasMany('App\SponsorPayment');
     }
+
+    /* role{
+        0 = 'applicant'
+        1 = 'sponsor'
+        2 = 'admin'
+     }
+     */
 }

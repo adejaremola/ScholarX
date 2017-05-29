@@ -1,27 +1,44 @@
-@extends('layouts.default')
+@extends('layouts.sidebar')
 
 @section('content')
 
-<section class="container" style="width: 50%; margin-left: 25%; margin-top: 5%;">
-	<h2 class="text-center">Create Profile</h2>
+	
 	@if (count($errors) > 0)
-    <!-- Form Error List -->
-    <div class="alert alert-danger">
-        <strong>Whoops! Something went wrong!</strong>
+	    <!-- Form Error List -->
+	    <div class="alert alert-danger">
+	        <strong>Whoops! Something went wrong!</strong>
 
-        <br><br>
+	        <br><br>
 
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+	        <ul>
+	            @foreach ($errors->all() as $error)
+	                <li>{{ $error }}</li>
+	            @endforeach
+	        </ul>
+	    </div>
 	@endif
+	@if (session('message'))
+    	<!-- Form Error List -->
+      	<div class="alert alert-success">
+        	<strong>{{ session('message') }}</strong>
+
+        	<br><br>
+
+      	</div>
+    @endif
+	<h2 class="text-center"> Update Profile</h2>
+	@if($user->profile)
 	<div>
-    	{!! Form::open(['url' => '/profile', 
+    	{!! Form::model($user->profile, ['url' => '/user/'.$user->profile->id.'/profile', 
+				    					'class' => 'form-horizontal',
+				    					'files' => 'true']) !!}
+		{!! method_field('PUT') !!}
+    @else
+	<div>
+    	{!! Form::open(['url' => '/user/'.$user->id.'/profile', 
     					'class' => 'form-horizontal',
     					'files' => 'true']) !!}
+    @endif
     		<div class="form-group">
     			{!! Form::label('name', 'Full Name:', 
     							['class' => 'control-label col-sm-2']) !!}
@@ -47,7 +64,7 @@
 			  		</select>
 		  		</div>
 		  	</div>
-      		<input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}" required>
+      		<input type="hidden" id="user_id" name="user_id" value="" required>
 		  	<div class="form-group">
 		  		{!! Form::label('institution', 'Institution:', 
 		  						['class' => 'control-label col-sm-2']) !!}
@@ -114,27 +131,27 @@
 		  	<div class="form-group"> 
 		    	<div class="col-sm-offset-2 col-sm-10">
 		    		{!! Form::submit('Submit', ['class' => 'btn btn-success btn-lg']) !!}
+		    		<a href="{{ url('/') }}" class="btn btn-lg btn-warning">Back</a>
 		    	</div>
 		  	</div>
 		{!! Form::close() !!}
     </div>
-</section>
-<script type="text/javascript">
-	$('#category').change(function() {
-        var labels = {
-            '1' : 'Class:',
-            '2' : 'Level:',
-            '-Select One-': 'Level:'
-        } 
-        $("label[for='level']").html(labels[$(this).val()]);
+	<script type="text/javascript">
+		$('#category').change(function() {
+	        var labels = {
+	            '1' : 'Class:',
+	            '2' : 'Level:',
+	            '-Select One-': 'Level:'
+	        } 
+	        $("label[for='level']").html(labels[$(this).val()]);
 
-        if ($(this).val() == '1') {
-          $('#cg').hide();
-          $('#fc').hide();
-        }else{
-          $('#fc').show();
-          $('#cg').show();
-        }
-    });
-</script>
+	        if ($(this).val() == '1') {
+	          $('#cg').hide();
+	          $('#fc').hide();
+	        }else{
+	          $('#fc').show();
+	          $('#cg').show();
+	        }
+	    });
+	</script>
 @stop

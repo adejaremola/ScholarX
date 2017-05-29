@@ -27,7 +27,7 @@
 	    		<div id="products" class="row list-group">
 		    		@foreach($applications as $application)
 		    			@if($application->profiler->category == 1)
-					        <div class="item  col-xs-6 col-lg-3">
+					        <div class="item  col-xs-6 col-lg-2">
 					            <div class="thumbnail">
 					                <img class="group list-group-image" src="{{ $application->profiler->pic_url }}" alt="" />
 					                <div class="caption">
@@ -42,7 +42,7 @@
 					                        </div>
 					                        <div class="col-xs-12 col-md-6">
 					                            <a class="btn btn-success" 
-					                            href="{{ url('sponsor/'.$application->id.'/details') }}">Details</a>
+					                            href="{{ url('/applications/'.$application->id.'/details') }}">Details</a>
 					                        </div>
 					                    </div>
 					                </div>
@@ -57,7 +57,7 @@
 	    	<div class="row">
 	    		@foreach($applications as $application)
 	    			@if($application->profiler->category == 2)
-					        <div class="item  col-xs-6 col-lg-3">
+					        <div class="item  col-xs-6 col-lg-2">
 					            <div class="thumbnail">
 					                <img class="group list-group-image" src="{{ $application->profiler->pic_url }}" alt="" />
 					                <div class="caption">

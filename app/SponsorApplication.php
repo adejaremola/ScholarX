@@ -8,19 +8,44 @@ use Illuminate\Database\Eloquent\Model;
 
 class SponsorApplication extends Model
 {
+
+    public function getStatus()
+    {
+        switch ($this->status) {
+            case 0: 
+                return 'pending';
+                break;
+
+            case 1: 
+                return 'approved';
+                break;
+
+            case 2: 
+                return 'in_fund';
+                break;
+
+            case 3: 
+                return 'funded';
+                break;
+
+            case 4: 
+                return 'rejected';
+                break;
+        }
+    }
+    
     protected $fillable = [
-        'academic_profile_id', 'sponsor_id', 'amount', 'profile', 'status'
+        'academic_profile_id', 'sponsor_id', 'amount', 'charge', 'total', 'profile', 'status'
     ];
     
     public static $rules = array(
 		'amount' => 'required',
-	'profile' => 'required',
+    	'profile' => 'required',
 		);
-
     
     public function sponsor()
     {
-    	return $this->hasMany('App\Sponsor');
+    	return $this->hasMany('App\SponsorPayment');
     }
     
 

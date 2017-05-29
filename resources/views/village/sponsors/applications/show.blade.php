@@ -70,7 +70,7 @@
 			</div>
 			@else
 			<div class="text-center" style="margin-top: 5%;">
-				<a href="{{ url('/sponsor/'.$application.'/fund') }}" class="btn btn-info" role="button">Fund</a>
+				<a href="{{ url('/applications/'.$application->id.'/fund') }}" class="btn btn-info" role="button">Fund</a>
 			</div>
 			@endif
 		</div>

@@ -33,7 +33,7 @@
 		        	<td>{{ $i++ }}</td>
 		        	<td>{{ $application->profile }}</td>
 		        	<td>{{ $application->amount }}</td>
-		        	<td>{{ $application->status }}</td>
+		        	<td>{{ $application->getStatus() }}</td>
 		        	<td>
 		        		<div class="btn-group">
 				    	{!! Form::open(['url' => '/application/'.$application->id.'/delete']) !!}

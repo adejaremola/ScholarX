@@ -9,46 +9,58 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::auth();
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::auth();
 
-
-Route::get('/dash', 'StudentController@redirect');
-
-Route::get('/applicants', 'SponsorApplicationController@index');
-Route::get('/applicants/{applicant}', 'SponsorApplicationController@details');
-Route::get('/applicants/{applicant}/fund', 'SponsorApplicationController@fund');
-
-Route::get('/apply', 'SponsorApplicationController@create');
-Route::post('/apply', 'SponsorApplicationController@store');
-
-Route::get('/verify', 'SponsorApplicationController@verify');
-Route::post('verify/{application}', 'SponsorApplicationController@postVerify');
-Route::post('reject/{application}', 'SponsorApplicationController@reject');
-
+//profile creation  create profile before applying      
 Route::get('/user/profile/create', 'StudentController@create');
-Route::put('/user/{profile}/profile', 'StudentController@edit');
-Route::post('user/{profile}/profile', 'StudentController@store');
+Route::post('user/{user}/profile', 'StudentController@store');
 
-Route::get('/user/{profile}/index', 'StudentController@index');
+//You can also edit profile, you're free to.
+Route::get('/user/{profile}/edit', 'StudentController@edit');
+Route::put('/user/{profile}/profile', 'StudentController@postEdit');
 
-Route::get('/user/{profile}/apply', 'StudentController@apply');
+
+//after profile creation, APPLY!!
+Route::get('/user/apply', 'StudentController@apply');
 Route::post('/user/{profile}', 'StudentController@postApply');
 
 
+//after succesful application, view in index of your applications
+Route::get('/user/{profile}/index', 'StudentController@index');
+
+
+//Edit Applications
 Route::get('/application/{application}/edit', 'StudentController@editApplication');
 Route::put('/application/{application}', 'StudentController@postEditApplication');
 
+
+//Delete Applications
 Route::delete('/application/{application}/delete', 'StudentController@deleteApplication');
 
-Route::get('/sponsor/index', 'SponsorController@index');
-Route::get('/sponsor/{application}/details', 'SponsorController@details');
 
-Route::get('/sponsor/{application}/fund', 'SponsorController@fund');
+
+
+//Sponsor Routes
+//index of all applications needing scholarships
+Route::get('/applications/index', 'SponsorController@index');
+
+//Details of a single application
+Route::get('/applications/{application}/details', 'SponsorController@details');
+
+//Funding route
+Route::get('/applications/{application}/fund', 'SponsorController@fund');
+Route::post('/applications/{application}', 'SponsorController@postFund');
+
+
+
+
+
+
 
 
 
