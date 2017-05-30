@@ -57,6 +57,16 @@ Route::get('/applications/{application}/fund', 'SponsorController@fund');
 Route::post('/applications/{application}', 'SponsorController@postFund');
 
 
+//Admin Routes
+//index of all applications (all categories)
+Route::get('/admin/applications', 'AdminController@index');
+
+//Details of a single application
+Route::get('/admin/applications/{application}', 'AdminController@getApplication');
+
+//Update of an application
+/*Route::get('/admin/applications/{application}', 'AdminController@index');
+*/
 
 
 

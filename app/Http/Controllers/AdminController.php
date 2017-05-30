@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\SponsorApplication;
 
+use Auth;
+
 class AdminController extends Controller
 {
     public function __construct()
@@ -17,12 +19,16 @@ class AdminController extends Controller
     {
     	$applications = SponsorApplication::all();
     	return view('admin.village.applications.index')
-    				->with('applications', $applications);
+    				->with('applications', $applications)
+                    ->with('user', Auth::user());
     }
 
-    public function getApplication()
+    public function getApplication(SponsorApplication $application)
     {
-    	
+        //dd($application->toArray());
+        return view('admin.village.applications.show')
+                    ->with('application', $application)
+                    ->with('user', Auth::user());
     }
 
     public function updateApplication()

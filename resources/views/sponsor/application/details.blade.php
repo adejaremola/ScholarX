@@ -2,10 +2,13 @@
 
 
 @section('content')	
-<section class="container" style="margin-top: 8%; margin-bottom: 5%;">
+<section class="container" style="margin-top: 5%; margin-bottom: 5%;">
+	<h1 class="text-center">Details</h1>
+	<br>
+	<br>
 	<div class="col-lg-8 col-lg-offset-2 sect">
 		<div class="col-lg-5" id="well">
-			<img style="margin-left: 10%" width="80%" src="{{ '/'.$application->profiler->pic_url }}">
+			<img style="margin-left: 10%" width="80%" src="{{ $application->profiler->pic_url }}">
 			<h2 class="text-center"></h2>
 			<div class="row">
 				<div class="col-lg-4">
@@ -60,11 +63,16 @@
 		<div class="col-lg-7" id="tell">
 			<h4 class="text-center" id="p">PROFILE</h4>
 			<p class="we">{{ $application->profile }}</p>
+			@if(Auth::user())
 			<div class="text-center" style="margin-top: 5%;">
 				<a href="#" class="btn btn-success" role="button">Verify</a>
 				<a href="#" class="btn btn-warning" role="button">Reject</a>
-				<a href="{{ url('/applicants/'.$application->profiler->id.'/fund')}}" class="btn btn-info" role="button">Fund</a>
 			</div>
+			@else
+			<div class="text-center" style="margin-top: 5%;">
+				<a href="{{ url('/applications/'.$application->id.'/fund') }}" class="btn btn-info" role="button">Fund</a>
+			</div>
+			@endif
 		</div>
 	</div>
 </section>
