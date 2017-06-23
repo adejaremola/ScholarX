@@ -62,29 +62,10 @@ Route::post('/applications/{application}', 'SponsorController@postFund');
 Route::get('/admin/applications', 'AdminController@index');
 
 //Details of a single application
-Route::get('/admin/applications/{application}', 'AdminController@getApplication');
+Route::get('/admin/applications/{application}', 'AdminController@show');
 
 //Update of an application
-/*Route::get('/admin/applications/{application}', 'AdminController@index');
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Route::put('/admin/applications/{application}', 'AdminController@edit');
 
 
 

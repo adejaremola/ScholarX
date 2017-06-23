@@ -12,7 +12,6 @@ class AdminController extends Controller
 {
     public function __construct()
     {
-    	$this->middleware('auth');
     }
 
     public function index()
@@ -23,16 +22,22 @@ class AdminController extends Controller
                     ->with('user', Auth::user());
     }
 
-    public function getApplication(SponsorApplication $application)
+    public function show(SponsorApplication $application)
     {
-        //dd($application->toArray());
         return view('admin.village.applications.show')
                     ->with('application', $application)
                     ->with('user', Auth::user());
     }
 
-    public function updateApplication()
+    public function edit(SponsorApplication $application, Request $request)
     {
-    	
+    	$application->status = $request->status;
+        $application->update();
+
+        if ($application->update()) {
+            return back()->with('message', "Status changed to '".$application->getStatus()."' successfully!");
+        } else {
+            return back()->with('message', 'Status change error, please try again later.');
+        }
     }
 }

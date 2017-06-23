@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class SponsorPayment extends Model
 {
     protected $fillable = [
-        'user_id', 'amount', 'sponsor_application_id'
+        'amount'
     ];
 
-    
+    protected $table = 'sponsors';
+
     public static $rules = array(
 		'amount' => 'required',
 		);

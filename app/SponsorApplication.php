@@ -21,7 +21,7 @@ class SponsorApplication extends Model
                 break;
 
             case 2: 
-                return 'in_fund';
+                return 'in fund';
                 break;
 
             case 3: 
@@ -33,7 +33,21 @@ class SponsorApplication extends Model
                 break;
         }
     }
-    
+
+    public function canAlter(){
+        return $this->status == 0
+                    or 
+               $this->status == 1
+                    or
+               $this->status == 4;
+    }
+
+    public function sponsorAmt()
+    {
+        if ($this->status == 2) {
+            return $this->sponsor()->get(['amount'])->sum();
+        }
+    }
     protected $fillable = [
         'academic_profile_id', 'sponsor_id', 'amount', 'charge', 'total', 'profile', 'status'
     ];

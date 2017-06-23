@@ -24,7 +24,7 @@ class SponsorApplicationsTableSeeder extends Seeder
                 'amount' => $amount = $faker->randomFloat(2, 1, 9) * 100,
 	            'charge' => $charge = $amount * (5/100),
                 'total' => $amount + $charge,
-	            'profile' => implode($faker->paragraphs(2)),
+	            'profile' => $faker->paragraph,
 	            'status' => $faker->numberBetween(0, 4),
                 'updated_at' => \Carbon\Carbon::now(),
                 'created_at' => \Carbon\Carbon::now(),    

@@ -27,13 +27,13 @@
       	</div>
     @endif
 	@if($method == 'edit')
-	<h2 class="text-center"> Edit Application </h2>
+	<h1 class="title"> Edit Application </h1>
 	<div>
     	{!! Form::model($application, ['url' => '/application/'.$application->id, 
 				    					'class' => 'form-horizontal']) !!}
 		{!! method_field('PUT') !!}
     @else
-    <h2 class="text-center">Create Application</h2>
+    <h1 class="title">Create Application</h1>
 	<div>
     	{!! Form::open(['url' => '/user/'.$user->profile->id, 
     					'class' => 'form-horizontal']) !!}

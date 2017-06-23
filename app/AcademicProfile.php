@@ -36,4 +36,9 @@ class AcademicProfile extends Model
     {
         return $this->hasOne(SponsorApplication::class);
     }
+
+    // category
+    // tertiary == 2
+    // primary == 1
+
 }

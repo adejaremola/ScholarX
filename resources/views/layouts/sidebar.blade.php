@@ -1,39 +1,38 @@
-
 <!DOCTYPE html>
-<html lang="en">
-<head>
-        @include('includes.head')
-</head>
-<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
-
-<nav class="navbar navbar-default navbar-fixed-top">
-    @include('includes.navbar')
-</nav>
-
-<section class="container" style="margin-top: 5%;">
-<div class="row">
-
-<div class="col-lg-2" style="margin-top: 5%;">
-	<ul class="nav nav-pills nav-stacked">
-	    @if($user->profile)
-	    <li><a href="{{ url('/user/'.$user->profile->id.'/edit') }}">Profile</a></li>
-	    <li><a href="{{ url('/user/'.$user->profile->id.'/index') }}">Applications</a></li>
-	    <li><a href="{{ url('/user/apply') }}">Apply</a></li>
-	    @else
-	    <li><a href="{{ url('/user/profile/create') }}">Profile</a></li>
-	    @endif
-	</ul>
-</div>
-<div class="col-lg-10">
-    @yield('content')
-</div>
-</div>
-</section>
-
-
-<footer class="text-center">
-    @include('includes.footer')     
-</footer>
-    @include('includes.scripts')
-</body>
+<html>
+	<head>
+		@include('includes.head')
+	</head>
+	<body>
+		<div class="wrapper-wide">
+  			<div id="header">
+    			<!-- Main Menu Start-->
+			    @include('includes.header')
+			    <!-- Main Menu End-->
+  			</div>
+			<div id="container">
+			    <div class="container">
+			      	<div class="row">
+			        	<!-- Left Part Start-->
+				        @include('includes.aside')
+			        	<!-- Left Part End-->
+				        <!--Middle Part Start-->
+				        <div id="content" class="col-sm-10">
+					        @yield('content')
+				        </div>
+				        <!--Middle Part End-->
+			      	</div>
+			    </div>
+			</div>
+		  	<!--Footer Start-->
+		  	<footer id="footer">
+		    	@include('includes.footer')
+		  	</footer>
+		  	<!--Footer End-->
+		</div>
+		<!-- JS Part Start-->
+		@include('includes.scripts')
+		<!-- JS Part End-->
+	</body>
 </html>
+

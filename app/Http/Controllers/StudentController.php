@@ -40,7 +40,7 @@ class StudentController extends Controller
         
         $image = $request->pic_url;
         $imagename = time()."-".$image->getClientOriginalName();
-        Image::make($image->getRealPath())->resize(200, 200)->save(public_path().'/images/'. $imagename);
+        Image::make($image->getRealPath())->resize(200, 200)->save(public_path().'/image/'. $imagename);
 
         $profile = new AcademicProfile;
         $profile->user_id = $user->id;
@@ -150,13 +150,10 @@ class StudentController extends Controller
     //Rredirectss to editing an old application page
     public function editApplication(SponsorApplication $application)
     {
-        $profile = $application->profile;
-        $method = 'edit';
         return view('village.students.applications.edit')
                     ->with('application', $application)
-                    ->with('profile', $application)
                     ->with('user', Auth::user())       
-                    ->with('method', $method);        
+                    ->with('method', 'edit');        
     }
 
     //Logic for editing a pre-existing application

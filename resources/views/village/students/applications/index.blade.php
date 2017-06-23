@@ -2,19 +2,19 @@
 
 
 @section('content')	
-	<div class="tab-content">
-		<h1 class="text-center">Applications</h1>
-		<br>		
-		<br>	
-		@if (session('message'))
-    	<!-- Form Error List -->
-      	<div class="alert alert-success">
-        	<strong>{{ session('message') }}</strong>
+	<br>		
+	<h1 class="title">Applications</h1>
+	<br>	
+	@if (session('message'))
+	<!-- Form Error List -->
+  	<div class="alert alert-success">
+    	<strong>{{ session('message') }}</strong>
 
-        	<br>
-      	</div>
-	    @endif	
-    	<table class="table">
+    	<br>
+  	</div>
+    @endif	
+    <div class="table-responsive">
+    	<table class="table table-hover">
 		    <thead>
 			    <tr>
 			        <th>#</th>
@@ -27,21 +27,23 @@
 		    <?php
 		    	$i = 1;
 		    ?>
-		    @foreach($applications as $application)
 		    <tbody>
+		    @foreach($applications as $application)
 		      	<tr>
 		        	<td>{{ $i++ }}</td>
-		        	<td>{{ $application->profile }}</td>
+		        	<td style="width: 65%;">{{ $application->profile }}</td>
 		        	<td>{{ $application->amount }}</td>
 		        	<td>{{ $application->getStatus() }}</td>
-		        	<td>
-		        		<div class="btn-group">
+		        	<td class="text-left">
+		        		@if($application->canAlter())
 				    	{!! Form::open(['url' => '/application/'.$application->id.'/delete']) !!}
 						{!! method_field('DELETE') !!}
 		        		<button type="submit" class="btn btn-danger">Delete</button>
 		        		{!! Form::close() !!}
 		        		<a href="{{ url('/application/'.$application->id.'/edit') }}" class="btn btn-info" role="button">Edit</a>
-		        		</div>
+		        		@else
+		        		<a href="{{ url('/application/'.$application->id.'/edit') }}" class="btn btn-info" role="button">View Sponsors</a>
+		        		@endif
 		        	</td>
 		      	</tr>
 		    </tbody>

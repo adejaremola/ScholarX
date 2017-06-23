@@ -15,10 +15,10 @@ class AcademicProfilesTableSeeder extends Seeder
      */
     public function run()
     {
-    	$users = User::where('role', '=', 0)->lists('id')->toArray();
-        $inde = count($users);
+    	$users = User::lists('id')->toArray();
+        $count = count($users);
         $faker = Faker::create();
-    	foreach (range(1,$inde) as $index) {
+    	foreach (range(1,$count) as $index) {
 	        DB::table('academic_profiles')->insert([
 	            'user_id' => $faker->unique()->randomElement($users),
 	            'institution' => 'University of '.$faker->firstName,

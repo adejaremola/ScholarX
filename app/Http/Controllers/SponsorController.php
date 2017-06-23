@@ -12,10 +12,29 @@ class SponsorController extends Controller
 {
     public function index()
     {
-    	$applications = SponsorApplication::whereBetween('status', [1, 2])
-    													->get();
-    	return view('village.sponsors.applications.index')
-    				->with('applications', $applications);												
+        $applications = SponsorApplication::whereBetween('status', [1, 2])->get();
+        
+        $approved = SponsorApplication::where('status', 1)->get();
+
+        $in_fund = SponsorApplication::where('status', 2)->get();
+
+        $secondary = $applications->filter(function ($application) {
+            if ($application->profiler->category == 1) {
+                return true;
+            }        
+        });
+
+        $tertiary = $applications->filter(function ($application) {
+            if ($application->profiler->category == 2) {
+                return true;
+            }        
+        });
+
+    	return view('village.sponsors.applications.index', ['applications' => $applications,
+                                                            'approved' => $approved,
+                                                            'in_fund' => $in_fund,
+                                                            'secondary' => $secondary,
+                                                            'tertiary' => $tertiary]);
     }
 
     public function details(SponsorApplication $application)

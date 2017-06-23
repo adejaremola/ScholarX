@@ -2,78 +2,45 @@
 
 
 @section('content')	
-<section class="container" style="margin-top: 5%; margin-bottom: 5%;">
-	<h1 class="text-center">Details</h1>
-	<br>
-	<br>
-	<div class="col-lg-8 col-lg-offset-2 sect">
-		<div class="col-lg-5" id="well">
-			<img style="margin-left: 10%" width="80%" src="{{ $application->profiler->pic_url }}">
-			<h2 class="text-center"></h2>
-			<div class="row">
-				<div class="col-lg-4">
-					<p>Institution: </p>
-				</div>
-				<div class="col-lg-8">
-					<p>{{ $application->profiler->institution }}</p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-4">
-					<p>Faculty: </p>
-				</div>
-				<div class="col-lg-8 text-left">
-					<p>{{ $application->profiler->faculty }}</p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-4">
-					<p class="text-right">Department: </p>
-				</div>
-				<div class="col-lg-8 text-left">
-					<p class="norm">{{ $application->profiler->department }}</p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-4">
-					<p>Level: </p>
-				</div>
-				<div class="col-lg-8 text-left">
-					<p class="norm">{{ $application->profiler->level }}</p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-4">
-					<p>CGPA: </p>
-				</div>
-				<div class="col-lg-8 text-left">
-					<p class="norm">{{ $application->profiler->cgpa }}</p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-4">
-					<p>Amount:</p>
-				</div>
-				<div class="col-lg-8 text-left">
-					<p class="norm">{{ $application->amount }}</p>
-				</div>
-			</div>
-			<p><span></span></p>
-		</div> 
-		<div class="col-lg-7" id="tell">
-			<h4 class="text-center" id="p">PROFILE</h4>
-			<p class="we">{{ $application->profile }}</p>
-			@if(Auth::user())
-			<div class="text-center" style="margin-top: 5%;">
-				<a href="#" class="btn btn-success" role="button">Verify</a>
-				<a href="#" class="btn btn-warning" role="button">Reject</a>
-			</div>
-			@else
-			<div class="text-center" style="margin-top: 5%;">
-				<a href="{{ url('/applications/'.$application->id.'/fund') }}" class="btn btn-info" role="button">Fund</a>
-			</div>
-			@endif
-		</div>
-	</div>
-</section>
+		<div itemscope itemtype="http://schema.org/Product">
+            <h1 class="title text-center" itemprop="name">{{ $application->profiler->user->name}}</h1>
+            <div class="row product-info" style="width: 76%; margin-left: 12%;">
+              <div class="col-sm-6">
+                  <div class="image">
+                  	<img class="img-responsive" itemprop="image" id="zoom_01" src="{{ $application->profiler->pic_url }}" data-zoom-image="image/product/macbook_air_1-500x500.jpg" /> 
+                  </div>
+                <ul class="list-unstyled description">
+                    <li><b>Institution:</b> <a href="#"><span itemprop="brand"> {{ $application->profiler->institution }}</span></a></li>
+                    <li><b>Faculty:</b> <span itemprop="mpn"> {{ $application->profiler->faculty }}</span></li>
+                    <li><b>Department:</b> {{ $application->profiler->department }}</li>
+                    <li><b>Level:</b> {{ $application->profiler->level }}</li>
+                    <li><b>CGPA:</b> {{ $application->profiler->cgpa }}</li>
+                </ul>
+              </div>
+              <div class="col-sm-6">
+                <p>{{ $application->profile }}</p>
+                <ul class="price-box">
+                	@if($application->sponsorAmt())
+                  	<li class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer"><span class="price-old">$1,202.00</span> <span itemprop="price">$1,142.00<span itemprop="availability" content="In Stock"></span></span></li>
+                  	<li></li>
+                  	<li>Ex Tax: $950.00</li>
+                  @else
+                    <li class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                      <span itemprop="price">{{ $application->amount }}
+                      </span>
+                    </li>
+                    <li></li>
+                  @endif
+                </ul>
+                <div id="product">
+                  <div class="cart">
+                    <div>
+                      <a href="{{ url('/applications/'.$application->id.'/fund') }}" type="button" id="button-cart" class="btn btn-primary btn-lg">Sponsor</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+
 @stop

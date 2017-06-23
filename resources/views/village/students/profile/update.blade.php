@@ -26,7 +26,10 @@
 
       	</div>
     @endif
-	<h2 class="text-center"> Update Profile</h2>
+    <br>
+    <br>
+	<h1 class="title"> Update Profile</h1>
+    <br>
 	@if($user->profile)
 	<div>
     	{!! Form::model($user->profile, ['url' => '/user/'.$user->profile->id.'/profile', 
