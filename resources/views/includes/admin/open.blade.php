@@ -32,7 +32,7 @@
 				    	$i = 1;
 				    ?>
 				    <tbody>
-					    @foreach($applications as $application)
+					    @foreach($open as $application)
 					    	@if($application->profiler->category == 2)
 						      	<tr>
 						        	<td>{{ $i++ }}</td>
@@ -73,7 +73,7 @@
 				    	$i = 1;
 				    ?>
 				    <tbody>
-					    @foreach($applications as $application)
+					    @foreach($open as $application)
 					    	@if($application->profiler->category == 1)
 						      	<tr>
 						        	<td>{{ $i++ }}</td>

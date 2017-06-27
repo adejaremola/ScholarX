@@ -8,6 +8,10 @@ use App\Http\Requests;
 
 use App\SponsorApplication;
 
+use App\SponsorPayment;
+
+use Paystack;
+
 class SponsorController extends Controller
 {
     public function index()
@@ -39,6 +43,7 @@ class SponsorController extends Controller
 
     public function details(SponsorApplication $application)
     {
+        session([ 'id' => $application->id ]);
         return view('village.sponsors.applications.show')
                     ->with('application', $application);
     }
@@ -56,10 +61,44 @@ class SponsorController extends Controller
         $sponsor = new SponsorPayment;
         $sponsor->amount = $request->amount;
         $sponsor->sponsor_application_id = $application->id;
-        $sponsor->comment = $request->comment;
-        $sponsor->sponsor_id = Auth::user()->id;
         $sponsor->save();
     	return view('sponsor.application.payment')
     				->with('application', $application);
+    }
+
+
+    /**
+     * Redirect the User to Paystack Payment Page
+     * @return Url
+     */
+    public function redirectToGateway()
+    {
+        return Paystack::getAuthorizationUrl()->redirectNow();
+    }
+
+    /**
+     * Obtain Paystack payment information
+     * @return void
+     */
+    public function handleGatewayCallback()
+    {
+        $paymentDetails = Paystack::getPaymentData();
+        $payment = new SponsorPayment;
+        $payment->amount = $paymentDetails['data']['amount'];
+        $payment->reference = $paymentDetails['data']['reference'];
+        $payment->sponsor_application_id = Session('id');
+        $payment->save();
+
+        if ($payment) {
+            return redirect('/applications/index')->with('message', 'Thanks!!');
+        }
+        else {
+             return back()->withInput()
+                          ->with('message', 'Unsuccessful!, retry later.');
+        }
+
+        // Now you have the payment details,
+        // you can store the authorization_code in your db to allow for recurrent subscriptions
+        // you can then redirect or do whatever you want
     }
 }

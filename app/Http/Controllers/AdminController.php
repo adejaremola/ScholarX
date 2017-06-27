@@ -16,10 +16,17 @@ class AdminController extends Controller
 
     public function index()
     {
-    	$applications = SponsorApplication::all();
-    	return view('admin.village.applications.index')
-    				->with('applications', $applications)
-                    ->with('user', Auth::user());
+        $pending = SponsorApplication::where('status', 0)->get();
+        $approved = SponsorApplication::where('status', 1)->get();
+        $open = SponsorApplication::where('status', 2)->get();
+        $funded = SponsorApplication::where('status', 3)->get();
+    	$rejected = SponsorApplication::where('status', 4)->get();
+
+        return view('admin.village.applications.index', ['pending' => $pending,
+                                                            'approved' => $approved,
+                                                            'open' => $open,
+                                                            'funded' => $funded,
+                                                            'rejected' => $rejected]);
     }
 
     public function show(SponsorApplication $application)

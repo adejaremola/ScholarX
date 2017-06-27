@@ -68,5 +68,13 @@ Route::get('/admin/applications/{application}', 'AdminController@show');
 Route::put('/admin/applications/{application}', 'AdminController@edit');
 
 
+Route::post('/pay', [
+    'uses' => 'SponsorController@redirectToGateway',
+    'as' => 'pay'
+]);
+
+Route::get('/payment/callback', 'SponsorController@handleGatewayCallback');
+
+
 
 

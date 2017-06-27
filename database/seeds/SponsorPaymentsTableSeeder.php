@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
+//use Paystack;
+
 class SponsorPaymentsTableSeeder extends Seeder
 {
     /**
@@ -11,18 +13,109 @@ class SponsorPaymentsTableSeeder extends Seeder
      */
     public function run()
     {
-        $profiles = AcademicProfile::lists('id')->toArray();
-        $count = count($profiles);
-        $faker = Faker::create();
-    	foreach (range(1,$count) as $index) {
-	        DB::table('sponsor_applications')->insert([
-	            'academic_profile_id' => $faker->unique()->randomElement($profiles),
-	            'amount' => $faker->randomFloat(2, 1, 9) * 100,
-	            'profile' => implode($faker->paragraphs(2)),
-	            'status' => $faker->numberBetween(0, 4),
-                'updated_at' => \Carbon\Carbon::now(),
-                'created_at' => \Carbon\Carbon::now(),    
-	        ]);
-        }
+        DB::table('sponsors')->insert([
+            'sponsor_application_id' => 3,
+            'amount' => 100,
+            'reference' => Paystack::genTranxRef(),
+            'updated_at' => \Carbon\Carbon::now(),
+            'created_at' => \Carbon\Carbon::now(),    
+        ]);
+
+        DB::table('sponsors')->insert([
+            'sponsor_application_id' => 3,
+            'amount' => 100,
+            'reference' => Paystack::genTranxRef(),
+            'updated_at' => \Carbon\Carbon::now(),
+            'created_at' => \Carbon\Carbon::now(),    
+        ]);
+
+        DB::table('sponsors')->insert([
+            'sponsor_application_id' => 6,
+            'amount' => 150,
+            'reference' => Paystack::genTranxRef(),
+            'updated_at' => \Carbon\Carbon::now(),
+            'created_at' => \Carbon\Carbon::now(),    
+        ]);
+
+        DB::table('sponsors')->insert([
+            'sponsor_application_id' => 8,
+            'amount' => 190,
+            'reference' => Paystack::genTranxRef(),
+            'updated_at' => \Carbon\Carbon::now(),
+            'created_at' => \Carbon\Carbon::now(),    
+        ]);
+
+        DB::table('sponsors')->insert([
+            'sponsor_application_id' => 8,
+            'amount' => 500,
+            'reference' => Paystack::genTranxRef(),
+            'updated_at' => \Carbon\Carbon::now(),
+            'created_at' => \Carbon\Carbon::now(),    
+        ]);
+
+        DB::table('sponsors')->insert([
+            'sponsor_application_id' => 16,
+            'amount' => 50,
+            'reference' => Paystack::genTranxRef(),
+            'updated_at' => \Carbon\Carbon::now(),
+            'created_at' => \Carbon\Carbon::now(),    
+        ]);
+
+        DB::table('sponsors')->insert([
+            'sponsor_application_id' => 21,
+            'amount' => 210,
+            'reference' => Paystack::genTranxRef(),
+            'updated_at' => \Carbon\Carbon::now(),
+            'created_at' => \Carbon\Carbon::now(),    
+        ]);
+
+        DB::table('sponsors')->insert([
+            'sponsor_application_id' => 38,
+            'amount' => 109,
+            'reference' => Paystack::genTranxRef(),
+            'updated_at' => \Carbon\Carbon::now(),
+            'created_at' => \Carbon\Carbon::now(),    
+        ]);
+
+        DB::table('sponsors')->insert([
+            'sponsor_application_id' => 39,
+            'amount' => 400,
+            'reference' => Paystack::genTranxRef(),
+            'updated_at' => \Carbon\Carbon::now(),
+            'created_at' => \Carbon\Carbon::now(),    
+        ]);
+
+        DB::table('sponsors')->insert([
+            'sponsor_application_id' => 39,
+            'amount' => 10,
+            'reference' => Paystack::genTranxRef(),
+            'updated_at' => \Carbon\Carbon::now(),
+            'created_at' => \Carbon\Carbon::now(),    
+        ]);
+
+        DB::table('sponsors')->insert([
+            'sponsor_application_id' => 39,
+            'amount' => 100,
+            'reference' => Paystack::genTranxRef(),
+            'updated_at' => \Carbon\Carbon::now(),
+            'created_at' => \Carbon\Carbon::now(),    
+        ]);
+
+        DB::table('sponsors')->insert([
+            'sponsor_application_id' => 44,
+            'amount' => 100,
+            'reference' => Paystack::genTranxRef(),
+            'updated_at' => \Carbon\Carbon::now(),
+            'created_at' => \Carbon\Carbon::now(),    
+        ]);
+
+        DB::table('sponsors')->insert([
+            'sponsor_application_id' => 44,
+            'amount' => 350,
+            'reference' => Paystack::genTranxRef(),
+            'updated_at' => \Carbon\Carbon::now(),
+            'created_at' => \Carbon\Carbon::now(),    
+        ]);
+
     }
 }

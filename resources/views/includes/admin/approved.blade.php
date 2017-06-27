@@ -32,7 +32,7 @@
 				    	$i = 1;
 				    ?>
 				    <tbody>
-					    @foreach($applications as $application)
+					    @foreach($approved as $application)
 					    	@if($application->profiler->category == 2)
 						      	<tr>
 						        	<td>{{ $i++ }}</td>
@@ -73,7 +73,7 @@
 				    	$i = 1;
 				    ?>
 				    <tbody>
-					    @foreach($applications as $application)
+					    @foreach($approved as $application)
 					    	@if($application->profiler->category == 1)
 						      	<tr>
 						        	<td>{{ $i++ }}</td>
@@ -85,7 +85,7 @@
 						        	<td>{{ $application->profiler->cgpa }}</td>
 						        	<td>{{ $application->amount }}</td>
 						        	<td class="text-left">
-						        		<a href="{{ url('/admin/applications/'.$application->id) }} class="btn btn-info" role="button">View Details</a>
+						        		<a href="{{ url('/admin/applications/'.$application->id) }}" class="btn btn-info" role="button">View Details</a>
 						        	</td>
 						      	</tr>
 				      		@endif
