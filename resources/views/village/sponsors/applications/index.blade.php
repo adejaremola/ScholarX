@@ -71,11 +71,11 @@
 	                		<p class="description">{{ $application->profile }}</p>
 	                		<p class="price"> 
 	                			@if($application->sponsorAmt())
-	                			<span class="price-new">{{ $application->total - $application->sponsorAmt() }}</span> 
-	                			<span class="price-old">{{ $application->total }}</span> 
-	                			<span class="saving">-26%</span> 
+	                			<span class="price-new">{{ number_format($application->total - $application->sponsorAmt()) }}</span> 
+	                			<span class="price-old">{{ number_format($application->total) }}</span> 
+	                			<span class="saving">-{{ $application->fundPercent() }}%</span> 
 	                			@else
-	                			<span class="price-new">{{ $application->total }}</span> 
+	                			<span class="price-new">{{ number_format($application->total) }}</span> 
 	                			@endif
 	                		</p>
 	              		</div>

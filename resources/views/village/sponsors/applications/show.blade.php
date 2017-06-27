@@ -24,7 +24,7 @@
                     </ul>
                 </div>
                 <div class="col-sm-6">
-                    <p><b>Status:</b> <span class="instock">{{ $application->getStatus() }}</span></p>
+                    <p>{{ $application->profile }}</p>
                     <ul class="price-box">                  
                         <li class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
                             <span itemprop="price">{{ $application->amount }}
@@ -32,12 +32,17 @@
                         </li>
                         <li></li>                 
                     </ul>
+                    <div class="progress">
+                        <div class="bar bar-success" style="width: 35%;"></div>
+                        <div class="bar bar-warning" style="width: 20%;"></div>
+                        <div class="bar bar-danger" style="width: 10%;"></div>
+                    </div>
                     <div id="product">
                         {!! Form::open(['route' => 'pay']) !!}
                         <div class="input-group">
                             <input type="hidden" name="email" value="aa@gmail.com"> {{-- required --}}
                             <input type="hidden" name="orderID" value="345">
-                            <input type="number" name="amount" id="amount" sr-only> {{-- required in kobo --}}
+                            <input type="hidden" name="amount" id="amount" sr-only> {{-- required in kobo --}}
                             <input type="hidden" name="quantity" value="3">
                             <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}"> {{-- required --}}
                             <input type="hidden" name="key" value="{{ config('paystack.secretKey') }}"> {{-- required --}}

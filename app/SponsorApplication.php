@@ -45,9 +45,17 @@ class SponsorApplication extends Model
     public function sponsorAmt()
     {
         if ($this->status == 2) {
-            return $this->sponsor()->get(['amount'])->sum();
+            return $this->sponsor->sum(['amount']);
         }
     }
+
+    public function fundPercent()
+    {
+        if ($this->status == 2) {
+            return intval(($this->sponsorAmt() / $this->total) * 100);
+        }
+    }
+
     protected $fillable = [
         'academic_profile_id', 'sponsor_id', 'amount', 'charge', 'total', 'profile', 'status'
     ];

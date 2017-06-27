@@ -111,7 +111,7 @@ class SponsorPaymentsTableSeeder extends Seeder
 
         DB::table('sponsors')->insert([
             'sponsor_application_id' => 44,
-            'amount' => 350,
+            'amount' => 200,
             'reference' => Paystack::genTranxRef(),
             'updated_at' => \Carbon\Carbon::now(),
             'created_at' => \Carbon\Carbon::now(),    
