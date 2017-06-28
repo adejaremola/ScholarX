@@ -1,20 +1,34 @@
-
 <!DOCTYPE html>
-<html lang="en">
-<head>
-        @include('includes.head')
-</head>
-<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
-
-<nav class="navbar navbar-default navbar-fixed-top">
-    @include('includes.navbar')
-</nav>
-
-    @yield('content')
-
-<footer class="text-center">
-    @include('includes.footer')     
-</footer>
-    @include('includes.scripts')
-</body>
+<html>
+	<head>
+		@include('includes.head')
+	</head>
+	<body>
+		<div class="wrapper-wide">
+  			<div id="header">
+    			<!-- Main Menu Start-->
+			    @include('includes.header')
+			    <!-- Main Menu End-->
+  			</div>
+			<div id="container">
+			    <div class="container">
+			      	<div class="row">
+				        <!--Middle Part Start-->
+				        <div id="content" class="col-sm-12">
+					        @yield('content')
+				        </div>
+				        <!--Middle Part End-->
+			      	</div>
+			    </div>
+			</div>
+		  	<!--Footer Start-->
+		  	<footer id="footer">
+		    	@include('includes.footer')
+		  	</footer>
+		  	<!--Footer End-->
+		</div>
+		<!-- JS Part Start-->
+		@include('includes.scripts')
+		<!-- JS Part End-->
+	</body>
 </html>

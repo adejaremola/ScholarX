@@ -2,6 +2,13 @@
 ## Eclipse
 #################
 
+/vendor
+/node_modules
+/public/storage
+Homestead.yaml
+Homestead.json
+.env
+
 .env
 
 vendor/
@@ -218,3 +225,4 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+

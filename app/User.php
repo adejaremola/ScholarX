@@ -12,7 +12,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'role'
     ];
 
     /**
@@ -24,13 +24,20 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function academicProfile()
+    public function profile()
     {
         return $this->hasOne('App\AcademicProfile');
     }
 
     public function sponsor()
     {
-        return $this->hasOne('App\Sponsor');
+        return $this->hasMany('App\SponsorPayment');
     }
+
+    /* role{
+        0 = 'applicant'
+        1 = 'sponsor'
+        2 = 'admin'
+     }
+     */
 }

@@ -14,11 +14,13 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-    	foreach (range(1,10) as $index) {
+    	foreach (range(1,50) as $index) {
 	        DB::table('users')->insert([
 	            'name' => $faker->name,
 	            'email' => $faker->email,
-	            'password' => bcrypt('secret'),
+                'password' => bcrypt('secret'),
+                'updated_at' => \Carbon\Carbon::now(),
+	            'created_at' => \Carbon\Carbon::now(),
 	        ]);
         }
     }
