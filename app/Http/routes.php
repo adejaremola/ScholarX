@@ -11,70 +11,66 @@
 */
 Route::auth();
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/village', 'VillageController@index');
+
+Route::group(['prefix' => 'admin/village', 'middleware' => ['auth']], function () {
+	//Admin Routes
+	//index of all applications (all categories)
+	Route::get('/applications', ['as' => 'applications', 'uses' => 'Admin\VillageController@index']);
+
+	//Details of a single application
+	Route::get('/applications/{application}', ['as' => 'applicant', 'uses' => 'Admin\VillageController@show']);
+
+	//Update of an application
+	Route::put('/applications/{application}', ['as' => 'edit_applicant', 'uses' => 'Admin\VillageController@edit']);
+});
+
+Route::group(['prefix' => 'student/village', 'middleware' => ['auth']], function (){
+	//profile creation  create profile before applying      
+	Route::get('/profile/create', ['as' => 'create_profile', 'uses' => 'Student\VillageController@create']);
+	Route::post('/{user}/profile', ['as' => 'profile_created', 'uses' => 'Student\VillageController@store']);
+
+	//You can also edit profile, you're free to.
+	Route::get('/{profile}/edit', ['as' => 'edit_profile', 'uses' => 'Student\VillageController@edit']);
+	Route::put('/{profile}/profile', ['as' => 'profile_edited', 'uses' => 'Student\VillageController@postEdit']);
+
+	//after profile creation, APPLY!!
+	Route::get('/apply', ['as' => 'apply', 'uses' => 'Student\VillageController@apply']);
+	Route::post('/{profile}', ['as' => 'applied', 'uses' => 'Student\VillageController@postApply']);
+
+
+	//after succesful application, view in index of your applications
+	Route::get('/{profile}/index', ['as' => 'my_applications', 'uses' => 'Student\VillageController@index']);
+
+
+	//Edit Applications
+	Route::get('/{application}/edit', ['as' => 'edit_application', 'uses' => 'Student\VillageController@editApplication']);
+	Route::put('/{application}', ['as' => 'application_edited', 'uses' => 'Student\VillageController@postEditApplication']);
+
+
+	//Delete Applications
+	Route::delete('/{application}/delete', ['as' => 'deleted', 'uses' => 'Student\VillageController@deleteApplication']);
 });
 
 
-//profile creation  create profile before applying      
-Route::get('/user/profile/create', 'StudentController@create');
-Route::post('user/{user}/profile', 'StudentController@store');
-
-//You can also edit profile, you're free to.
-Route::get('/user/{profile}/edit', 'StudentController@edit');
-Route::put('/user/{profile}/profile', 'StudentController@postEdit');
 
 
-//after profile creation, APPLY!!
-Route::get('/user/apply', 'StudentController@apply');
-Route::post('/user/{profile}', 'StudentController@postApply');
+Route::group(['prefix' => 'sponsor/village'], function (){
 
+	//Sponsor Routes
+	//index of all applications needing scholarships
+	Route::get('/index', ['as' => 'index', 'uses' => 'Sponsor\VillageController@index']);
 
-//after succesful application, view in index of your applications
-Route::get('/user/{profile}/index', 'StudentController@index');
+	//Details of a single application
+	Route::get('/{application}/details', ['as' => 'details', 'uses' => 'Sponsor\VillageController@details']);
 
+	Route::post('/pay', [
+	    'uses' => 'Sponsor\VillageController@redirectToGateway',
+	    'as' => 'pay'
+	]);
 
-//Edit Applications
-Route::get('/application/{application}/edit', 'StudentController@editApplication');
-Route::put('/application/{application}', 'StudentController@postEditApplication');
-
-
-//Delete Applications
-Route::delete('/application/{application}/delete', 'StudentController@deleteApplication');
-
-
-
-
-//Sponsor Routes
-//index of all applications needing scholarships
-Route::get('/applications/index', 'SponsorController@index');
-
-//Details of a single application
-Route::get('/applications/{application}/details', 'SponsorController@details');
-
-//Funding route
-Route::get('/applications/{application}/fund', 'SponsorController@fund');
-Route::post('/applications/{application}', 'SponsorController@postFund');
-
-
-//Admin Routes
-//index of all applications (all categories)
-Route::get('/admin/applications', 'AdminController@index');
-
-//Details of a single application
-Route::get('/admin/applications/{application}', 'AdminController@show');
-
-//Update of an application
-Route::put('/admin/applications/{application}', 'AdminController@edit');
-
-
-Route::post('/pay', [
-    'uses' => 'SponsorController@redirectToGateway',
-    'as' => 'pay'
-]);
-
-Route::get('/payment/callback', 'SponsorController@handleGatewayCallback');
-
+	Route::get('/payment/callback', 'Sponsor\VillageController@handleGatewayCallback');
+});
 
 
 

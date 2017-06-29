@@ -65,7 +65,7 @@
                     </div>
                     @endif
                     <div id="product">
-                        {!! Form::model($application, ['url' => '/admin/applications/'.$application->id]) !!}
+                        {!! Form::model($application, ['url' => 'admin/village/applications/'.$application->id]) !!}
                         {!! method_field('PUT') !!}
                     	<div class="input-group">
             				<select class="form-control" id="status" name="status">

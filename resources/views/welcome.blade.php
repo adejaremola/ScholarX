@@ -15,11 +15,11 @@
     </div>
     <div class="col-md-3">
         <p>Students</p>
-        <a href="{{ url('/user/apply') }}" role="button" class="btn btn-success btn-lg">Apply For Funding</a>
+        <a href="{{ route('apply') }}" role="button" class="btn btn-success btn-lg">Apply For Funding</a>
     </div>
     <div class="col-md-3">
         <p>Sponsors</p>
-        <a href="{{ url('/applications/index') }}" role="button" class="btn btn-warning btn-lg">Browse FundRaisers</a>
+        <a href="{{ route('index') }}" role="button" class="btn btn-warning btn-lg">Fund a Student Today</a>
     </div>
     <div class="col-md-3">
       
@@ -27,7 +27,22 @@
   </div>
 </div>
 <br>
-<br>
+<div  class="category-module" id="latest_category">
+    <h3 class="subtitle">Latest Applications - <a class="viewall" href="category.tpl">view all</a></h3>
+    <div class="category-module-content">
+        <div id="tab-cat1" class="tab_content">
+            <div id="carousel" class="owl-carousel nxt">
+                @foreach($applications as $application)
+                <div class="item text-center"> 
+                    <a href="{{ url('/applications/'.$application->id.'/details') }}">
+                        <img src="{{ $application->profiler->pic_url }}" alt="Palm" class="img-responsive" />
+                    </a> 
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+</div>
 <br>
 
 

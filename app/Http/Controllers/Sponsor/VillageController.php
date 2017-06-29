@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Sponsor;
+
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
@@ -12,7 +14,7 @@ use App\SponsorPayment;
 
 use Paystack;
 
-class SponsorController extends Controller
+class VillageController extends Controller
 {
     public function index()
     {
@@ -83,6 +85,7 @@ class SponsorController extends Controller
     public function handleGatewayCallback()
     {
         $paymentDetails = Paystack::getPaymentData();
+       //
         $payment = new SponsorPayment;
         $payment->amount = $paymentDetails['data']['amount'];
         $payment->reference = $paymentDetails['data']['reference'];
@@ -90,11 +93,11 @@ class SponsorController extends Controller
         $payment->save();
 
         if ($payment) {
-            return redirect('/applications/index')->with('message', 'Thanks!!');
+            return redirect('/sponsor/village/index')->with('message', 'Thanks for your Kindness!!');
         }
         else {
              return back()->withInput()
-                          ->with('message', 'Unsuccessful!, retry later.');
+                          ->with('message', 'Unsuccessful! Retry later.');
         }
 
         // Now you have the payment details,

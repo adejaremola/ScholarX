@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
@@ -8,7 +10,7 @@ use App\SponsorApplication;
 
 use Auth;
 
-class AdminController extends Controller
+class VillageController extends Controller
 {
     public function __construct()
     {

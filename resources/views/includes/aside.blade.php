@@ -8,11 +8,11 @@
 	<div class="box-category">
 	    <ul class="cat_accordion">
 		    @if($user->profile)
-		    <li><a href="{{ url('/user/'.$user->profile->id.'/edit') }}">Profile</a></li>
-		    <li><a href="{{ url('/user/'.$user->profile->id.'/index') }}">Applications</a></li>
-		    <li><a href="{{ url('/user/apply') }}">Apply</a></li>
+		    <li><a href="{{ route('edit_profile', $user->profile->id) }}">Profile</a></li>
+		    <li><a href="{{ route('my_applications', $user->profile->id) }}">Applications</a></li>
+		    <li><a href="{{ route('apply') }}">Apply</a></li>
 		    @else
-		    <li><a href="{{ url('/user/profile/create') }}">Profile</a></li>
+		    <li><a href="{{ route('create_profile') }}">Profile</a></li>
 		    @endif
 		</ul>
 	</div>

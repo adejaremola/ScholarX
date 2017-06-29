@@ -35,15 +35,11 @@
 		        	<td>{{ $application->amount }}</td>
 		        	<td>{{ $application->getStatus() }}</td>
 		        	<td class="text-left">
-		        		@if($application->canAlter())
-				    	{!! Form::open(['url' => '/application/'.$application->id.'/delete']) !!}
+				    	{!! Form::open(['url' => 'student/village/'.$application->id.'/delete']) !!}
 						{!! method_field('DELETE') !!}
 		        		<button type="submit" class="btn btn-danger">Delete</button>
 		        		{!! Form::close() !!}
-		        		<a href="{{ url('/application/'.$application->id.'/edit') }}" class="btn btn-info" role="button">Edit</a>
-		        		@else
-		        		<a href="{{ url('/application/'.$application->id.'/edit') }}" class="btn btn-info" role="button">View Sponsors</a>
-		        		@endif
+		        		<a href="{{ route('edit_application', $application->id) }}" class="btn btn-info" role="button">Edit</a>
 		        	</td>
 		      	</tr>
 		    </tbody>

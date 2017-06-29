@@ -2,6 +2,13 @@
 
 
 @section('content')	
+	@if (session('message'))
+        <div class="alert alert-success">
+            <strong>{{ session('message') }}</strong>
+
+            <br>
+        </div>
+    @endif
 	<br>
 	<br>
 	<h1 class="title">Scholarship Applicants</h1>
@@ -61,13 +68,15 @@
 	        <div class="product-layout product-list col-xs-12">
 	          	<div class="product-thumb">
 	            	<div class="image">
-	            		<a href="product.html">
+	            		<a href="{{ route('details', $application->id) }}">
 	            			<img src="{{ $application->profiler->pic_url }}" alt="" title="" class="img-responsive" />
 	            		</a>
 	            	</div>
 	            	<div>
 	              		<div class="caption">
-	                		<h4><a href="product.html">{{ $application->profiler->user->name }}</a></h4>
+	                		<h4>
+	                			<a href="{{ route('details', $application->id) }}">{{ $application->profiler->user->name }}</a>
+	                		</h4>
 	                		<p class="description">{{ $application->profile }}</p>
 	                		<p class="price"> 
 	                			@if($application->sponsorAmt())
@@ -80,7 +89,7 @@
 	                		</p>
 	              		</div>
 	              		<div class="button-group">
-	                		<a class="btn-primary" type="button" href="{{ url('/applications/'.$application->id.'/details') }}"><span>Details</span></a>
+	                		<a class="btn-primary" type="button" href="{{ route('details', $application->id) }}"><span>Details</span></a>
 	              		</div>
 	            	</div>
 	          	</div>
@@ -92,13 +101,15 @@
 		        <div class="product-layout product-list col-xs-12">
 		          	<div class="product-thumb">
 		            	<div class="image">
-		            		<a href="product.html">
+		            		<a href="{{ route('details', $application->id) }}">
 		            			<img src="{{ $application->profiler->pic_url }}" alt="" title="" class="img-responsive" />
 		            		</a>
 		            	</div>
 		            	<div>
 		              		<div class="caption">
-		                		<h4><a href="product.html">{{ $application->profiler->user->name }}</a></h4>
+		                		<h4>
+		                			<a href="{{ route('details', $application->id) }}">{{ $application->profiler->user->name }}</a>
+		                		</h4>
 		                		<p class="description">{{ $application->profile }}</p>
 		                		<p class="price"> 
 		                			@if($application->sponsorAmt())
@@ -111,7 +122,7 @@
 		                		</p>
 		              		</div>
 		              		<div class="button-group">
-		                		<a class="btn-primary" type="button" href="{{ url('/applications/'.$application->id.'/details') }}"><span>Details</span></a>
+		                		<a class="btn-primary" type="button" href="{{ route('details', $application->id) }}"><span>Details</span></a>
 		              		</div>
 		            	</div>
 		          	</div>
@@ -123,13 +134,15 @@
 		        <div class="product-layout product-list col-xs-12">
 		          	<div class="product-thumb">
 		            	<div class="image">
-		            		<a href="product.html">
+		            		<a href="{{ route('details', $application->id) }}">
 		            			<img src="{{ $application->profiler->pic_url }}" alt="" title="" class="img-responsive" />
 		            		</a>
 		            	</div>
 		            	<div>
 		              		<div class="caption">
-		                		<h4><a href="product.html">{{ $application->profiler->user->name }}</a></h4>
+		                		<h4>
+		                			<a href="{{ route('details', $application->id) }}">{{ $application->profiler->user->name }}</a>
+		                		</h4>
 		                		<p class="description">{{ $application->profile }}</p>
 		                		<p class="price"> 
 		                			@if($application->sponsorAmt())
@@ -142,7 +155,7 @@
 		                		</p>
 		              		</div>
 		              		<div class="button-group">
-		                		<a class="btn-primary" type="button" href="{{ url('/applications/'.$application->id.'/details') }}"><span>Details</span></a>
+		                		<a class="btn-primary" type="button" href="{{ route('details', $application->id) }}"><span>Details</span></a>
 		              		</div>
 		            	</div>
 		          	</div>
@@ -154,13 +167,15 @@
 		        <div class="product-layout product-list col-xs-12">
 		          	<div class="product-thumb">
 		            	<div class="image">
-		            		<a href="product.html">
+		            		<a href="{{ route('details', $application->id) }}">
 		            			<img src="{{ $application->profiler->pic_url }}" alt="" title="" class="img-responsive" />
 		            		</a>
 		            	</div>
 		            	<div>
 		              		<div class="caption">
-		                		<h4><a href="product.html">{{ $application->profiler->user->name }}</a></h4>
+		                		<h4>	
+		                			<a href="{{ route('details', $application->id) }}">{{ $application->profiler->user->name }}</a>
+		                		</h4>
 		                		<p class="description">{{ $application->profile }}</p>
 		                		<p class="price"> 
 		                			@if($application->sponsorAmt())
@@ -173,7 +188,7 @@
 		                		</p>
 		              		</div>
 		              		<div class="button-group">
-		                		<a class="btn-primary" type="button" href="{{ url('/applications/'.$application->id.'/details') }}"><span>Details</span></a>
+		                		<a class="btn-primary" type="button" href="{{ route('details', $application->id) }}"><span>Details</span></a>
 		              		</div>
 		            	</div>
 		          	</div>
@@ -185,13 +200,15 @@
 		        <div class="product-layout product-list col-xs-12">
 		          	<div class="product-thumb">
 		            	<div class="image">
-		            		<a href="product.html">
+		            		<a href="{{ route('details', $application->id) }}">
 		            			<img src="{{ $application->profiler->pic_url }}" alt="" title="" class="img-responsive" />
 		            		</a>
 		            	</div>
 		            	<div>
 		              		<div class="caption">
-		                		<h4><a href="product.html">{{ $application->profiler->user->name }}</a></h4>
+		                		<h4>
+		                			<a href="{{ route('details', $application->id) }}">{{ $application->profiler->user->name }}</a>
+		                		</h4>
 		                		<p class="description">{{ $application->profile }}</p>
 		                		<p class="price"> 
 		                			@if($application->sponsorAmt())
@@ -204,7 +221,7 @@
 		                		</p>
 		              		</div>
 		              		<div class="button-group">
-		                		<a class="btn-primary" type="button" href="{{ url('/applications/'.$application->id.'/details') }}"><span>Details</span></a>
+		                		<a class="btn-primary" type="button" href="{{ route('details', $application->id) }}"><span>Details</span></a>
 		              		</div>
 		            	</div>
 		          	</div>

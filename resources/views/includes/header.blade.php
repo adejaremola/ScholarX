@@ -6,9 +6,9 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                 <li class="mega-menu dropdown">
-                    <a href="{{ url('/') }}">ScholarX</a>
+                    <a href="{{ url('/village') }}">ScholarX</a>
                 </li>
-                <li class="custom-link-right"><a href="{{ url('/admin/applications') }}" target="_blank"> Admin</a></li>
+                <li class="custom-link-right"><a href="{{ route('applications') }}"> Admin</a></li>
                 @if(Auth::user())
                 <li class="custom-link-right"><a href="{{ url('/logout') }}" target="_blank"> Logout</a></li>
                 @else

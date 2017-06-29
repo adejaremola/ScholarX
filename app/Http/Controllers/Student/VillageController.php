@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Student;
 
 use Illuminate\Http\Request;
+
+use App\Http\Controllers\Controller;
 
 use App\Http\Requests;
 
@@ -16,7 +18,7 @@ use Image;
 
 use Auth;
 
-class StudentController extends Controller
+class VillageController extends Controller
 {
 	public function __construct()
 	{
@@ -139,7 +141,7 @@ class StudentController extends Controller
         $application->save();
 
         if ($application) {
-            return redirect('/user/'.$profile->id.'/index')
+            return redirect('student/village/'.$profile->id.'/index')
                                 ->with('message', 'Application successfully created!');
         }else{
             return back()->withInput()
@@ -185,12 +187,11 @@ class StudentController extends Controller
     {
         $id = $application->profiler->id;
         $application->delete();
-
         if ($application->delete()) {
-            return redirect('/user/'.$id.'/index')
+            return redirect('/student/village/'.$id.'/index')
                     ->with('message', 'Application successfully deleted!');
         } else {
-            return redirect('/user/'.$id.'/index')
+            return redirect('/student/village/'.$id.'/index')
                     ->withErrors('Delete unsuccessful, please try again later!');
         }
     }

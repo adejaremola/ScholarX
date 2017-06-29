@@ -31,14 +31,14 @@
 	<h1 class="title"> Edit Application </h1>
     <br>
 	<div>
-    	{!! Form::model($application, ['url' => '/application/'.$application->id, 
+    	{!! Form::model($application, ['url' => '/student/village/'.$application->id, 
 				    					'class' => 'form-horizontal']) !!}
 		{!! method_field('PUT') !!}
     @else
     <h1 class="title">Create Application</h1>
     <br>
 	<div>
-    	{!! Form::open(['url' => '/user/'.$user->profile->id, 
+    	{!! Form::open(['url' => '/student/village/'.$user->profile->id, 
     					'class' => 'form-horizontal']) !!}
     @endif
     		<div class="form-group">

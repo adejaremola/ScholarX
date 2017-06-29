@@ -44,7 +44,7 @@
 						        	<td>{{ $application->profiler->cgpa }}</td>
 						        	<td>{{ $application->amount }}</td>
 						        	<td class="text-left">
-						        		<a href="{{ url('/admin/applications/'.$application->id) }}" class="btn btn-info" role="button">View Details</a>
+						        		<a href="{{ route('applicant', $application->id) }}" class="btn btn-info" role="button">View Details</a>
 						        	</td>
 						      	</tr>
 				      		@endif
@@ -85,7 +85,7 @@
 						        	<td>{{ $application->profiler->cgpa }}</td>
 						        	<td>{{ $application->amount }}</td>
 						        	<td class="text-left">
-						        		<a href="{{ url('/admin/applications/'.$application->id) }}" class="btn btn-info" role="button">View Details</a>
+						        		<a href="{{ route('applicant', $application->id) }}" class="btn btn-info" role="button">View Details</a>
 						        	</td>
 						      	</tr>
 				      		@endif

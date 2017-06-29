@@ -32,13 +32,13 @@
     <br>
 	@if($user->profile)
 	<div>
-    	{!! Form::model($user->profile, ['url' => '/user/'.$user->profile->id.'/profile', 
+    	{!! Form::model($user->profile, ['url' => 'student/village/'.$user->profile->id.'/profile', 
 				    					'class' => 'form-horizontal',
 				    					'files' => 'true']) !!}
 		{!! method_field('PUT') !!}
     @else
 	<div>
-    	{!! Form::open(['url' => '/user/'.$user->id.'/profile', 
+    	{!! Form::open(['url' => 'student/village/'.$user->id.'/profile', 
     					'class' => 'form-horizontal',
     					'files' => 'true']) !!}
     @endif
@@ -134,11 +134,12 @@
 		  	<div class="form-group"> 
 		    	<div class="col-sm-offset-2 col-sm-10">
 		    		{!! Form::submit('Submit', ['class' => 'btn btn-success btn-lg']) !!}
-		    		<a href="{{ url('/') }}" class="btn btn-lg btn-warning">Back</a>
+		    		<a href="{{ url('/village') }}" class="btn btn-lg btn-warning">Back</a>
 		    	</div>
 		  	</div>
 		{!! Form::close() !!}
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		$('#category').change(function() {
 	        var labels = {
