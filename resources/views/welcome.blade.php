@@ -28,13 +28,13 @@
 </div>
 <br>
 <div  class="category-module" id="latest_category">
-    <h3 class="subtitle">Latest Applications - <a class="viewall" href="category.tpl">view all</a></h3>
+    <h3 class="subtitle">Latest Applications - <a class="viewall" href="{{ route('index') }}">view all</a></h3>
     <div class="category-module-content">
         <div id="tab-cat1" class="tab_content">
             <div id="carousel" class="owl-carousel nxt">
                 @foreach($applications as $application)
                 <div class="item text-center"> 
-                    <a href="{{ url('/applications/'.$application->id.'/details') }}">
+                    <a href="{{ route('details', $application->id) }}">
                         <img src="{{ $application->profiler->pic_url }}" alt="Palm" class="img-responsive" />
                     </a> 
                 </div>
