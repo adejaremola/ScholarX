@@ -10,10 +10,10 @@
                 </li>
                 <li class="custom-link-right"><a href="{{ route('applications') }}"> Admin</a></li>
                 @if(Auth::user())
-                <li class="custom-link-right"><a href="{{ url('/logout') }}" target="_blank"> Logout</a></li>
+                <li class="custom-link-right"><a href="{{ url('/logout') }}"> Logout</a></li>
                 @else
-                <li class="custom-link-right"><a href="{{ url('/login') }}" target="_blank"> Login</a></li>
-                <li class="custom-link-right"><a href="{{ url('/register') }}" target="_blank"> Register</a></li>
+                <li class="custom-link-right"><a href="{{ url('/login') }}"> Login</a></li>
+                <li class="custom-link-right"><a href="{{ url('/register') }}"> Register</a></li>
                 @endif
             </ul>
         </div>

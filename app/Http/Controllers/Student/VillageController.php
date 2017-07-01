@@ -20,17 +20,13 @@ use Auth;
 
 class VillageController extends Controller
 {
-	public function __construct()
-	{
-		$this->middleware('auth');
-	}
 
 //profile actions
     public function create()
     {
         $user = Auth::user();
         if ($user->profile) {
-            return redirect('/user/apply');
+            return redirect('student/village/apply');
         }
         return view('village.students.profile.update')
                 ->with('user', $user);
@@ -57,7 +53,7 @@ class VillageController extends Controller
         $profile->save();
 
         if ($profile) {
-            return redirect('/user/apply')->with('message', 'Profile created successfully!');
+            return redirect('student/village/apply')->with('message', 'Profile created successfully!');
         }
         else {
              return back()->withInput()
@@ -92,7 +88,7 @@ class VillageController extends Controller
         $profile->update();
 
         if ($profile->update()) {
-            return redirect('/user/apply')
+            return redirect('student/village/apply')
                         ->with('message', 'Profile Update successful!');
         }
         else {
@@ -124,7 +120,7 @@ class VillageController extends Controller
                         ->with('user', Auth::user())
                         ->with('method', 'create');
         }
-        return redirect('/user/profile/create');
+        return redirect('student/village/profile/create');
     }
 
     //This post-function handles the logic in creating the new application
@@ -172,7 +168,7 @@ class VillageController extends Controller
 
         if ($application->update()) {
             $message = 'Update successful!';
-            return redirect('/user/'.$application->profiler->id.'/index')
+            return redirect('student/village/'.$application->profiler->id.'/index')
                         ->with('message', $message);
         }
         else {

@@ -27,16 +27,18 @@
       	</div>
     @endif
     <br>
-    <br>
-	<h1 class="title"> Update Profile</h1>
-    <br>
 	@if($user->profile)
+	<h1 class="title"> Update Profile </h1>
+    <br>
 	<div>
     	{!! Form::model($user->profile, ['url' => 'student/village/'.$user->profile->id.'/profile', 
 				    					'class' => 'form-horizontal',
 				    					'files' => 'true']) !!}
 		{!! method_field('PUT') !!}
     @else
+    <h1 class="title"> Create Profile </h1>
+    <p style="margin-top: -15px;">You need to create one to start applying</p>
+    <br>
 	<div>
     	{!! Form::open(['url' => 'student/village/'.$user->id.'/profile', 
     					'class' => 'form-horizontal',
@@ -139,23 +141,5 @@
 		  	</div>
 		{!! Form::close() !!}
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script type="text/javascript">
-		$('#category').change(function() {
-	        var labels = {
-	            '1' : 'Class:',
-	            '2' : 'Level:',
-	            '-Select One-': 'Level:'
-	        } 
-	        $("label[for='level']").html(labels[$(this).val()]);
-
-	        if ($(this).val() == '1') {
-	          $('#cg').hide();
-	          $('#fc').hide();
-	        }else{
-	          $('#fc').show();
-	          $('#cg').show();
-	        }
-	    });
-	</script>
+	
 @stop

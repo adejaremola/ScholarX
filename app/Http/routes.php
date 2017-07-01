@@ -11,6 +11,11 @@
 */
 Route::auth();
 
+Route::get('/', function ()
+{
+	return redirect('/village');
+});
+
 Route::get('/village', 'VillageController@index');
 
 Route::group(['prefix' => 'admin/village', 'middleware' => ['auth']], function () {
